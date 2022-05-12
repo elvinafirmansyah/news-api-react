@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+body{
+    background-color: var(--dark-blue);
+}
+:root {
+    --light: #caf0f8;
+    --green: #005714;
+    --medium: #90e0ef;
+    --dark-blue: #03045e;
+    --honeydew: honeydew;
+}
+.App{
+    width: 80%;
+    margin: 0 auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+.App .navbar {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    color: var(--light);
+}
+.App .navbar .navbar-item{
+    margin-left: auto;
+}
+.App .navbar .nav-item {
+    text-decoration: none;
+    color: #caf0f8;
+    font-size: 17px;
+    margin-left: 15px;
+    width: 100%;
+    padding: 10px 13px;
+}
+.App .navbar .nav-active {
+    text-decoration: none;
+    color: #005714;
+    background: honeydew;
+    padding: 10px 13px;
+    font-size: 17px;
+    margin-left: 15px;
+    border-radius: 10px;
+}
+.App .navbar .home-btn {
+    text-decoration: none;
+    color: var(--lig);
+    font-size: 25px;
+    padding: 0 13px;
+}
+.App .navbar .hamburger {
+    border: 0;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    background-color: honeydew;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    display: none;
+}
+.App .navbar .hamburger:hover{
+    background-color: var(--medium);
+}
+/* Mobile Version */
+@media (max-width: 768px) {
+    .App {
+        width: 100%;
+    }
+    .App .navbar .hamburger {
+        display: block;
+    }
+    .App .navbar .home-btn {
+        font-size: 32px;
+    }
+    .App .navbar .navbar-item .navbar-list {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        padding: 13px;
+        flex-direction: column;
+        width: 100%;
+        height: calc(100vh - 72vh);
+        background-color: #01023d;
+        display: none;
+    }
+    .App .navbar .navbar-item.expanded .navbar-list {
+        display: block;
+    }
+    .App .navbar .navbar-item .nav-item,
+    .App .navbar .navbar-item .nav-active {
+        max-width: 100%;
+        margin: 0 0 15px 0;
+        display: flex;
+    }
+}
