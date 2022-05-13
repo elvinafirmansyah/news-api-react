@@ -41,6 +41,7 @@ export default function CNBCNews() {
     function relog() {
         window.location.reload();
     }
+
     return(
         <div className="main-content">
             <div className="title">
