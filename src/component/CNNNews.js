@@ -6,6 +6,7 @@ export default function CNNNews() {
     const [loading, setLoading] = useState(true);
     const [searchInput, setSearchInput] = useState('');
     const [filteredResults, setFilteredResults] = useState([]);
+    const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
         document.title = 'CNN News';
@@ -25,13 +26,21 @@ export default function CNNNews() {
         if (searchValue !== '') {
             const filteredNews = articles.filter((news) => {
                 return Object.values(news.title).join('').toLowerCase().includes(searchValue.toLowerCase())
-            });            
+            });
+            if (filteredNews.length < 1) {
+                setNotFound(true);
+            }
             setFilteredResults(filteredNews);
         } else {
             setFilteredResults(articles);
+            setNotFound(false);
         }
     }
     
+    function relog() {
+        window.location.reload();
+    }
+
     return(
         <div className="main-content">
             <div className="title">
@@ -43,43 +52,43 @@ export default function CNNNews() {
                 placeholder="Search.."
                 onChange={(e) => searchItems(e.target.value)}
             />
-            {loading && (<h2 className="loading-part" style={{color: "white"}}>Loading...</h2>)}
-            {!loading && (
+            {loading && (<h2 style={{color: "white"}}>Loading...</h2>)}
+            {notFound && (<h2 style={{color: "white"}} className="notFound">Article isn't found, Please try again<button onClick={relog}>Relog</button></h2>)}
+            {!notFound && (
                 <div className="article">
                     {searchInput.length > 1 ? (
-                        filteredResults.map((news) => {
-                            return(
-                                <article key={news.id} className="news">
-                                    <a href={news.link} target="blank">
-                                        <img src={news.image.small} alt={news.title} style={{width: "100%"}} />
+                        filteredResults.map((news) => (
+                            <article key={news.id} className="news">
+                                <a href={news.link} target="blank">
+                                    <img src={news.image.large} style={{ width: "100%" }} alt={news.title} />
+                                </a>
+                                <h2>
+                                    <a href={news.link} className="article-title" target="blank">
+                                        {news.title}
                                     </a>
-                                    <h2>
-                                        <a href={news.link} className="article-title" target="blank">{news.title}</a>
-                                    </h2>
-                                    <p style={{ color: "lightgray"}}>{news.description}</p>
-                                    <time>
-                                        {new Date(news.isoDate).toLocaleDateString()}
-                                    </time>
-                                </article>
-                            )
-                        })
+                                </h2>
+                                <p style={{color: "lightgray"}}>{news.contentSnippet}</p>
+                                <time className="article-time">
+                                    {new Date(news.isoDate).toLocaleDateString()}
+                                </time>
+                            </article>
+                        ))
                     ) : (
                         articles.map((news) => (
-                                <article key={news.id} className="news">
-                                    <a href={news.link} target="blank">
-                                        <img src={news.image.large} style={{ width: "100%" }} alt={news.title} />
+                            <article key={news.id} className="news">
+                                <a href={news.link} target="blank">
+                                    <img src={news.image.large} style={{ width: "100%" }} alt={news.title} />
+                                </a>
+                                <h2>
+                                    <a href={news.link} className="article-title" target="blank">
+                                        {news.title}
                                     </a>
-                                    <h2>
-                                        <a href={news.link} className="article-title" target="blank">
-                                            {news.title}
-                                        </a>
-                                    </h2>
-                                    <p style={{color: "lightgray"}}>{news.contentSnippet}</p>
-                                    <time className="article-time">
-                                        {new Date(news.isoDate).toLocaleDateString()}
-                                    </time>
-                                </article>
-
+                                </h2>
+                                <p style={{color: "lightgray"}}>{news.contentSnippet}</p>
+                                <time className="article-time">
+                                    {new Date(news.isoDate).toLocaleDateString()}
+                                </time>
+                            </article>
                         ))
                     )}
                 </div>

@@ -6,15 +6,16 @@ export default function TribunNews() {
     const [loading, setLoading] = useState(true);
     const [searchInput, setSearchInput] = useState('');
     const [filteredResults, setFilteredResults] = useState([]);
+    const [notFound, setNotFound] = useState(false);
 
 
     useEffect(() => {
         async function getNews() {
-            const request = await fetch(
+            const req = await fetch(
                 'https://berita-indo-api.vercel.app/v1/voa'
             );
-            const response = await request.json();
-            setArticles(response.data);
+            const resp = await req.json();
+            setArticles(resp.data);
             setLoading(false);
         };
         getNews();
@@ -25,11 +26,19 @@ export default function TribunNews() {
         if (searchInput !== '') {
             const filteredNews = articles.filter((news) => {
                 return Object.values(news.title).join('').toLowerCase().includes(searchInput.toLowerCase())
-            });            
+            });
+            if (filteredNews.length < 1) {
+                setNotFound(true);
+            }
             setFilteredResults(filteredNews);
         } else {
             setFilteredResults(articles);
+            setNotFound(false);
         }
+    }
+
+    function relog() {
+        window.location.reload();
     }
 
     return(
@@ -43,8 +52,10 @@ export default function TribunNews() {
                 placeholder="Search.."
                 onChange={(e) => searchItems(e.target.value)}
             />
-            {loading && <h2 className="loading-part" style={{ color: "white" }}>Loading...</h2>}
-            {!loading && (
+            {loading && <h2 style={{ color: "white" }}>Loading...</h2>}
+            {notFound ? (
+                <h2 style={{color: "white"}} className="notFound">Article isn't found, Please try again<button onClick={relog}>Relog</button></h2>
+            ) : (
                 <div className="article">
                     {searchInput.length > 1 ? (
                         filteredResults.map((news) => {

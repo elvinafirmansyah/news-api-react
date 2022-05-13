@@ -7,6 +7,7 @@ export default function BBCNews() {
     const [articles, setBbcNews] = useState([]);
     const [input, setInput] = useState('');
     const [output, setOutput] = useState([]);
+    const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
         document.title = 'BBC News';
@@ -28,9 +29,17 @@ export default function BBCNews() {
                 return Object.values(news.title).join('').toLowerCase().includes(searchValue.toLowerCase())
             });  
             setOutput(filteredNews);
+            if (filteredNews.length < 1) {
+                setNotFound(true);
+            }
         } else {
             setOutput(articles);
+            setNotFound(false);
         }
+    }
+
+    function relog() {
+        window.location.reload();
     }
     return(
         <div className="main-content">
@@ -43,8 +52,10 @@ export default function BBCNews() {
                 placeholder="Search.."
                 onChange={(e) => getItems(e.target.value)}
             />
-            {loading && <h2 className="loading-part" style={{ color: "white" }}>Loading...</h2>}
-            {!loading && (
+            {loading && <h2 style={{ color: "white" }}>Loading...</h2>}
+            {notFound ? (
+                <h2 style={{color: "white"}} className="notFound">Article isn't found, Please try again<button onClick={relog}>Relog</button></h2>
+            ) : (
                 <div className="article">
                     {input.length > 1 ? (
                         output.map((news) => {

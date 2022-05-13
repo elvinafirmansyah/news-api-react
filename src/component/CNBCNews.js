@@ -7,6 +7,7 @@ export default function CNBCNews() {
     const [loading, setLoading] = useState(true);
     const [input, setInput] = useState('');
     const [output, setOutput] = useState([]);
+    const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
         document.title = 'CNBC News';
@@ -27,10 +28,18 @@ export default function CNBCNews() {
             const filteredNews = bbcnews.filter((news) => {
                 return Object.values(news.title).join('').toLowerCase().includes(input.toLowerCase());
             })
+            if (filteredNews.length < 1) {
+                setNotFound(true);
+            }
             setOutput(filteredNews);
         } else {
             setOutput(bbcnews);
+            setNotFound(false);
         }
+    }
+
+    function relog() {
+        window.location.reload();
     }
     return(
         <div className="main-content">
@@ -43,14 +52,16 @@ export default function CNBCNews() {
                 placeholder="Search.."
                 onChange={(e) => getNews(e.target.value)}
             />
-            {loading && <h2 className="loading-part" style={{color: "white"}}>Loading...</h2>}
-            {!loading && (
+            {loading && <h2 style={{color: "white"}}>Loading...</h2>}
+            {notFound && (<h2 style={{color: "white"}} className="notFound">Article isn't found, Please try again<button onClick={relog}>Relog</button></h2>)}
+            {!notFound && (
                 <div className="article">
                     {input.length > 1 ? (
-                        output.map((news) => {
-                            return(
-                                
+                        output.map((news) => (
                                 <article key={news.id} className="news">
+                                    <a href={news.link} target="blank">
+                                        <img src={news.image.large} style={{ width: "100%" }} alt={news.title} />
+                                    </a>
                                     <h2>
                                         <a href={news.link} className="article-title" target="blank">{news.title}</a>
                                     </h2>
@@ -59,11 +70,13 @@ export default function CNBCNews() {
                                         {new Date(news.isoDate).toLocaleDateString()}
                                     </time>
                                 </article>
-                            )
-                        })
+                        ))
                     ) : (
                         bbcnews.map((news) => (
                             <article key={news.id} className="news">
+                                <a href={news.link} target="blank">
+                                        <img src={news.image.large} style={{ width: "100%" }} alt={news.title} />
+                                    </a>
                                 <h2>
                                     <a href={news.link} className="article-title" target="blank">{news.title}</a>
                                 </h2>

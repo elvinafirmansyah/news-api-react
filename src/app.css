@@ -91,7 +91,7 @@ body{
         padding: 13px;
         flex-direction: column;
         width: 100%;
-        height: calc(100vh - 72vh);
+        height: calc(100vh - 63.5vh);
         background-color: #01023d;
         display: none;
     }

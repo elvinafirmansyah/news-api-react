@@ -33,12 +33,29 @@ section{
     padding-bottom: 1rem;
 }
 .main-content .input-box{
-    width: 80%;
+    width: 78%;
     margin-bottom: 2rem;
     padding: 11px 13px;
     border: none;
     outline: none;
     border-radius: 6.5px;
+}
+.main-content .notFound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.main-content .notFound button {
+    padding: 9px 11px;
+    margin: 0 10px;
+    outline: none;
+    background-color: var(--medium);
+    border-radius: 7px;
+    cursor: pointer;
+}
+.main-content .notFound button:hover {
+    background-color: var(--light);
 }
 ::placeholder {
     font-size: 14px;
@@ -48,6 +65,8 @@ section{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 850px;
+    padding: 2rem 0;
 }
 .article .img-box img{
     max-width: 100%;
@@ -55,10 +74,9 @@ section{
 .news:nth-child(1) {
     border-top: 1.2px rgba(255, 255, 255, 0.3) solid;
 }
-.news {
+.article .news {
     padding: 2rem 0;
     border-bottom: 1.2px rgba(255, 255, 255, 0.3) solid;
-    width: 850px;
 }
 .news .article-title {
     color: var(--white);
@@ -80,7 +98,10 @@ section{
     width: 100%;
 }
 @media (max-width: 768px) {
-    .article {
-        width: 100%;
+    .main-content .notFound {
+        flex-direction: column;
+    }
+    .main-content .notFound button {
+        margin: 13px 0;
     }
 }
