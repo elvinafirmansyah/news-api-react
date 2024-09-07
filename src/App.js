@@ -5,6 +5,7 @@ import CNBCNews from "./component/CNBCNews";
 import BBCNews from "./component/BBCNews";
 import VOANews from "./component/VOANews";
 import "./app.css"
+import "./index.css"
 
 export default function App() {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -12,7 +13,7 @@ export default function App() {
     <div className="App">
       <nav className="navbar">
         <Link to="/" className="home-btn">
-          <i class="bi bi-house-fill"></i>
+          <h2 className="font-bold">ENews</h2>
         </Link>
         <button className="hamburger" onClick={() => {setIsNavExpanded(!isNavExpanded);}}><i class="bi bi-list"></i></button>
         <div className={isNavExpanded ? "navbar-item expanded" : "navbar-item"}>

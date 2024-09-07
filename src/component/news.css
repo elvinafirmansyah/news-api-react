@@ -1,9 +1,11 @@
 :root {
-    --light: #caf0f8;
+    --light: #40e4c6;
     --green: #005714;
-    --medium: #90e0ef;
-    --dark-blue: #03045e;
+    --medium: #40e4c6;
+    --dark-blue: #000014;
+    --honeydew: honeydew;
     --white: #ffffff;
+    --glass: rgb(255, 255, 255, 0.2);
 }
 
 .main-content {
@@ -33,12 +35,13 @@ section{
     padding-bottom: 1rem;
 }
 .main-content .input-box{
-    width: 78%;
-    margin-bottom: 2rem;
+    width: 100%;
     padding: 11px 13px;
     border: none;
     outline: none;
-    border-radius: 6.5px;
+    color: white;
+    border-radius: 10px;
+    background: var(--glass);
 }
 .main-content .notFound {
     display: flex;
@@ -57,35 +60,34 @@ section{
 .main-content .notFound button:hover {
     background-color: var(--light);
 }
+.main-content .loading {
+    margin-top: 1rem;
+}
 ::placeholder {
     font-size: 14px;
 }
 .article {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 850px;
     padding: 2rem 0;
 }
 .article .img-box img{
     max-width: 100%;
-}
-.news:nth-child(1) {
-    border-top: 1.2px rgba(255, 255, 255, 0.3) solid;
+    border-radius: 10px;
 }
 .article .news {
     padding: 2rem 0;
-    border-bottom: 1.2px rgba(255, 255, 255, 0.3) solid;
 }
 .news .article-title {
     color: var(--white);
     text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+.news a img {
+    border-radius: 10px;
 }
 .news .article-title:hover{
-    color: var(--dark-blue);
-    -webkit-text-stroke-width: 0.55px;
-    -webkit-text-stroke-color: var(--light);
+    color: var(--medium);
+    text-decoration: underline;
 }
 .news time{
     color: var(--light);

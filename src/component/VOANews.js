@@ -44,19 +44,18 @@ export default function TribunNews() {
     return(
         <div className="main-content">
             <div className="title">
-                <h2>All VOA News</h2>
-                <p>we have lots of news that must be read by you guys because of all news here likely have the greatest new things to be read as well</p>
+                <h2 className="text-2xl font-bold">All VOA News</h2>
             </div>
             <input
                 className="input-box"
                 placeholder="Search.."
                 onChange={(e) => searchItems(e.target.value)}
             />
-            {loading && <h2 style={{ color: "white" }}>Loading...</h2>}
+            {loading && (<h2 className="loading" style={{color: "white"}}>Loading...</h2>)}
             {notFound ? (
                 <h2 style={{color: "white"}} className="notFound">Article isn't found, Please try again<button onClick={relog}>Relog</button></h2>
             ) : (
-                <div className="article">
+                <div className="article grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {searchInput.length > 1 ? (
                         filteredResults.map((news) => {
                             return(
@@ -69,7 +68,12 @@ export default function TribunNews() {
                                     </h2>
                                     <p style={{ color: "lightgray"}}>{news.description}</p>
                                     <time>
-                                        {new Date(news.isoDate).toLocaleDateString()}
+                                        {new Date(news.isoDate).toLocaleDateString('id-ID', {
+    weekday: 'long', // displays the day of the week
+    year: 'numeric',
+    month: 'long',  // displays the full month name
+    day: 'numeric'
+})}
                                     </time>
                                 </article>
                             )
@@ -85,7 +89,12 @@ export default function TribunNews() {
                                 </h2>
                                 <p style={{ color: "lightgray"}}>{news.description}</p>
                                 <time>
-                                    {new Date(news.isoDate).toLocaleDateString()}
+                                    {new Date(news.isoDate).toLocaleDateString('id-ID', {
+    weekday: 'long', // displays the day of the week
+    year: 'numeric',
+    month: 'long',  // displays the full month name
+    day: 'numeric'
+})}
                                 </time>
                             </article>
                         ))

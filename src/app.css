@@ -1,20 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Nunito', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 body{
     background-color: var(--dark-blue);
 }
 :root {
-    --light: #caf0f8;
+    --light: #40e4c6;
     --green: #005714;
-    --medium: #90e0ef;
-    --dark-blue: #03045e;
+    --medium: #40e4c6;
+    --dark-blue: #000014;
     --honeydew: honeydew;
+    --glass: rgb(255, 255, 255, 0.2);
 }
 .App{
     width: 80%;
@@ -24,7 +25,6 @@ body{
 }
 .App .navbar {
     height: 70px;
-    width: 100%;
     display: flex;
     align-items: center;
     position: relative;
@@ -35,16 +35,18 @@ body{
 }
 .App .navbar .nav-item {
     text-decoration: none;
-    color: #caf0f8;
+    color: var(--medium);
     font-size: 17px;
+    font-weight: 500;
     margin-left: 15px;
     width: 100%;
     padding: 10px 13px;
 }
 .App .navbar .nav-active {
     text-decoration: none;
-    color: #005714;
-    background: honeydew;
+    color: var(--light);
+    background: var(--glass);
+    font-weight: bold;
     padding: 10px 13px;
     font-size: 17px;
     margin-left: 15px;
@@ -61,17 +63,13 @@ body{
     height: 45px;
     width: 45px;
     border-radius: 50%;
-    background-color: honeydew;
+    background: var(--glass);
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
     position: absolute;
     top: 50%;
     right: 1rem;
     transform: translateY(-50%);
     display: none;
-}
-.App .navbar .hamburger:hover{
-    background-color: var(--medium);
 }
 /* Mobile Version */
 @media (max-width: 768px) {
@@ -92,7 +90,7 @@ body{
         flex-direction: column;
         width: 100%;
         height: calc(100vh - 63.5vh);
-        background-color: #01023d;
+        background-color: var(--dark-blue);
         display: none;
     }
     .App .navbar .navbar-item.expanded .navbar-list {
